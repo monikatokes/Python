@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="blog.css">
+
+</head>
+
+<body>
+
+<div class="top-div">
+	<div style="display: flex;">
+		<div class="logo-div">
+				<img src="logo.png" class="logo-icon">
+			
+		</div>
+		<div class="main-menu">
+			<p class="main-menu-item">ABOUT ME</p>
+		</div>
+		
+	</div>	
+</div>
+	
+	<div id="intro">
+		Salut, sunt Monika si sunt super incantata sa fac parte din grupa de Python. Se zice ca o imagine vorbeste mai mult decat 1000 de cuvinte, so have fun!
+	</div>
+
+	<div id="carousel-div">	
+		<div class="slideshow-container">
+
+			<div class="mySlides">
+			  <img src="travelling.png" style="width:100%">
+			</div>
+
+			<div class="mySlides">
+			  <img src="horses.png" style="width:100%">
+			</div>
+
+			<div class="mySlides">
+			  <img src="baking.png" style="width:100%">
+			</div>
+
+			<div class="mySlides">
+			  <img src="plants.png" style="width:100%">
+			</div>
+
+			<a class="prev" onclick="changeSlide(-1)">&lt;</a>
+			<a class="next" onclick="changeSlide(1)">&gt;</a>
+
+			<div style="text-align:center; margin-top: 20px;">
+				  <span class="dot" onclick="currentSlide(1)"></span> 
+				  <span class="dot" onclick="currentSlide(2)"></span> 
+				  <span class="dot" onclick="currentSlide(3)"></span>
+				  <span class="dot" onclick="currentSlide(4)"></span>
+			</div>
+		</div>
+
+
+
+		<section>
+			<h2>Colleagues' Blog</h2>
+
+			<ul class="coll-list">
+			    <li><a href="https://www.google.ro/" target="_blank">Rares</a></li>
+			    <li><a href="https://www.google.ro/" target="_blank">Ioana Nasui</a></li>
+			    <li><a href="https://www.google.ro/" target="_blank">Alexandra Ghete</a></li>
+			    <li><a href="https://www.google.ro/" target="_blank">Calin Checicheis</a></li>
+			    <li><a href="https://www.google.ro/" target="_blank">Adriana</a></li>
+			    <li><a href="https://www.google.ro/" target="_blank">Alin Todoran</a></li>
+			    <li><a href="https://www.google.ro/" target="_blank">Bogdan Stan</a></li>
+			    <li><a href="https://www.google.ro/" target="_blank">David Coptip</a></li>
+			    <li><a href="https://www.google.ro/" target="_blank">Cristian Moigradan</a></li>
+			    <li><a href="https://www.google.ro/" target="_blank">Ionut</a></li>
+			    <li><a href="https://www.google.ro/" target="_blank">Luminita</a></li>
+			    <li><a href="https://www.google.ro/" target="_blank">Mihai Turcu</a></li>
+			    <li><a href="https://www.google.ro/" target="_blank">Oana Cos</a></li>
+			    <li><a href="https://www.google.ro/" target="_blank">Ovidiu Cimpan</a></li>
+			    <li><a href="https://www.google.ro/" target="_blank">Sorin Munteanu</a></li>
+			</ul>	
+			
+		</section>
+
+
+	</div>
+
+
+
+<br>
+           
+
+<script>
+var slideIndex = 1;
+showSlide(slideIndex);
+
+function changeSlide(n) {
+  showSlide(slideIndex = slideIndex + n);
+}
+
+function currentSlide(n) {
+  showSlide(slideIndex = n);
+}
+
+function showSlide(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}  //end of carousel - go to start  
+  if (n < 1) {slideIndex = slides.length} // start of carousel - go to end
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className = dots[slideIndex-1].className + " active";
+}
+</script>
+
+</body>
+</html>
