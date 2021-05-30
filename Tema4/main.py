@@ -47,6 +47,13 @@ def get_raw_data():
 
     return description, raw_data
 
+def prepare_dataset(description, raw_data):
+    final_dataset = {}
+    for row in raw_data:
+        country = raw_data[0]
+
+
+
 
 if __name__ == '__main__':
     description, raw_data = get_raw_data()
