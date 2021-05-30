@@ -85,10 +85,13 @@ def sets_operations():
 
     c = a.union(b)
     print(c)
+
     c = a.intersection(b)
     print(c)
+
     c = a.difference(b)
     print(c)
+
     c = a.symmetric_difference(b)
     print(c)
 
