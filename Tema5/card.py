@@ -27,13 +27,13 @@ class Deck:
         for i in value_list:
             for j in suit_list:
                 cards_list.append(Card(j, i))
-        print(cards_list.__len__())
+        print(len(cards_list))
         self.cards_list = cards_list
 
     def deal_remove_card(self, suit, value):
 
         found = 0
-        for i in range(self.cards_list.__len__()):
+        for i in range(len(self.cards_list)):
             if self.cards_list[i].get_card_suit() == suit:
                 if self.cards_list[i].get_card_value() == value:
                     self.cards_list.remove(self.cards_list[i])
@@ -43,18 +43,18 @@ class Deck:
             raise Exception("Card was not found")
 
     def print_elements(self):
-        for i in range(self.cards_list.__len__()):
+        for i in range(len(self.cards_list)):
             print(self.cards_list[i].display_card())
 
     def shuffle_cards(self):
         random.shuffle(self.cards_list)
-        if self.cards_list.__len__() != 52:
+        if len(self.cards_list) != 52:
             raise Exception("Cards cannot be shuffled")
 
 
 deck = Deck()
-print(deck.cards_list.__len__())
+print(len(deck.cards_list))
 deck.deal_remove_card('Diamonds', 'A')
-print(deck.cards_list.__len__())
+print(len(deck.cards_list))
 deck.shuffle_cards()
 deck.print_elements()

@@ -1,3 +1,5 @@
+
+
 def get_raw_data():
     description = ('Country', [
     '2011 ', '2012 ', '2013 ', '2014 ', '2015 ', '2016 ', '2017 ', '2018 ',
@@ -44,16 +46,36 @@ def get_raw_data():
     ('UK', ['83 ', '87 ', '88 ', '90 ', '91 ', '93 ', '94 ', '95 ', '96 ']),
     ('XK', [': ', ': ', ': ', ': ', ': ', ': ', '89 ', '93 ', '93 ']),
     ]
-
     return description, raw_data
 
-def prepare_dataset(description, raw_data):
-    final_dataset = {}
-    for row in raw_data:
-        country = raw_data[0]
 
+def prepare_dataset(desc, raw__data):
+    final_dataset = dict()
+    year_list = desc[1]
 
+    for row in raw__data:
+        country_code = row[0]
+        coverage_list = row[1]
+
+        coverages_year = list()
+        for index in range(len(coverage_list)):
+            coverage = coverage_list[index]
+            year = year_list[index]
+            if coverage != ": ":
+                coverage = "".join([digit for digit in coverage if digit.isdigit()])
+
+                coverages_year.append(
+                    {
+                        "year": year.strip(),
+                        "coverage": int(coverage)
+                    }
+                )
+        final_dataset[country_code] = coverages_year
+
+    return final_dataset
 
 
 if __name__ == '__main__':
     description, raw_data = get_raw_data()
+    prepared_data = prepare_dataset(description, raw_data)
+    print(prepared_data)
