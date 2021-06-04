@@ -1,4 +1,4 @@
-
+from decimal import Decimal
 
 def get_raw_data():
     description = ('Country', [
@@ -75,7 +75,127 @@ def prepare_dataset(desc, raw__data):
     return final_dataset
 
 
+def data_per_year(data, year):
+
+    result_list = list()
+    result_dict = dict()
+
+    for key, values in data.items():
+        for value in values:
+            if value.get("year") == year:
+                result_list.append((key, value.get("coverage")))
+
+    result_dict[year] = result_list
+    return result_dict
+
+
+def data_per_country(data, country):
+
+    result_list = list()
+    result_dict = dict()
+
+    country_rec = data.get(country)
+    print(country_rec)
+    for value in country_rec:
+        result_list.append((value.get("year"), value.get("coverage")))
+
+    result_dict[country] = result_list
+    return result_dict
+
+
+def average_data(data):
+    coverage_sum = 0
+
+    for key, values in data.items():
+        for value in values:
+            coverage_sum += value[1]
+
+    return coverage_sum/len(values)
+
+
+#Closures, Decorators
+def uppercase(fnc):
+
+    def wrapper(name):
+
+        res = fnc(name)
+        modified = res.upper()
+
+        return modified
+    return wrapper
+
+
+@uppercase
+def greet(name):
+    return "Greetings {}!".format(name)
+
+
+def safe_divide(fnc):
+
+    def wrapper(first, second):
+
+        if second == 0:
+            return "Division cannot be done"
+
+        res = fnc(first, second)
+
+        return res
+    return wrapper
+
+
+@safe_divide
+def divide(first_number, second_number):
+    return first_number / second_number
+
+
+print_registry = []
+
+
+def register(fnc):
+    fnc.wrapped = True
+    print_registry.append(fnc.__name__)
+    return fnc
+
+
+@register
+def greet_second(name):
+    return "Greetings {}!".format(name)
+
+
+def say_hello(name):
+    return "Hello {}!".format(name)
+
+
+@register
+def say_goodbye(name):
+    return "Goodbye {}!".format(name)
+
+
+def safe_addition(fnc):
+
+    def wrapper(a, b):
+        if a + b != Decimal(str(a)) + Decimal(str(b)):
+            return "You will have floating point errors!"
+
+    return wrapper
+
+
+@safe_addition
+def addition(a, b):
+    return a + b
+
+
 if __name__ == '__main__':
     description, raw_data = get_raw_data()
     prepared_data = prepare_dataset(description, raw_data)
     print(prepared_data)
+    print(data_per_year(prepared_data, "2019"))
+    data_prepared_by_country = data_per_country(prepared_data, "AT")
+    print(data_prepared_by_country)
+    print(average_data(data_prepared_by_country))
+    print(greet("Monika"))
+    print(divide(1, 3))
+    print(addition(0.1, 0.2))
+    print(say_goodbye("Julia"))
+    print(print_registry)
+
